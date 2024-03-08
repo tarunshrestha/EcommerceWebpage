@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>
+    <title>{% block title %} Products {% endblock %}</title>
+</head>
+<body>
+{% block content %}
+<br>
+<div class="container">
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+          {% if product.is_sale %}
+            <div class="badge bg-dark text-white position-absolute " style="top: 1rem; right: 1rem">Sale</div>
+          {% endif %}
+
+        <h5 class="card-title">{{ product.name }}</h5>
+
+          <!-- Product stars-->
+          <div class="d-flex  small text-warning mb-2">
+           {% for _ in "x"|ljust:product.stars %}
+                <div class="bi-star-fill"></div>&nbsp;
+           {% endfor %}
+            </div>
+          <p>
+
+          <!-- Product price-->
+         {% if product.is_sale %}
+            <strike style="color: red;">Rs {{ product.price }}</strike>
+            &nbsp;
+            Rs {{ product.sale_price }}
+         {% else %}
+            Rs {{ product.price }}
+         {% endif %}
+          </p>
+        <p class="card-text" style="text-align: justify;">{{ product.description }}</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <br>
+          <a href="{% url 'home' %}" class="btn btn-primary">Buy</a>&nbsp;&nbsp;
+          <a href="{% url 'home' %}" class="btn btn-outline-dark mt-auto">Add to cart</a>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{%endblock%}
+</body>
+</html>
